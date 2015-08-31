@@ -8,14 +8,24 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     theme: grunt.option('theme'),
     
-    copy: {
-      files: {    	
-    	nonull: true,
-    	expand: true,
-    	cwd: '../skin/frontend/<%= theme %>/css/',
-    	src: ["*.*", "**/*.*"],
-        dest: '../skin/frontend/<%= theme %>/source/css/'
-      }  
+    copy: {   
+      css:{	    
+       	nonull: true,
+       	expand: true,
+       	cwd: '../skin/frontend/<%= theme %>/css/',
+       	src: ["*.*", "**/*.*"],
+        dest: '../skin/frontend/<%= theme %>/source/css/'	   
+      },
+
+      js:{	    
+         	nonull: true,
+         	expand: true,
+         	cwd: '../skin/frontend/<%= theme %>/js/',
+         	src: ["*.*", "**/*.*"],
+          dest: '../skin/frontend/<%= theme %>/source/js/'	   
+        },      
+	   
+	    
     },
     
     cssmin: {
@@ -27,6 +37,8 @@ module.exports = function(grunt) {
         }
     },          
     
+    
+      
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -34,8 +46,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-yui-compressor');
   grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-closure-compiler');
   
   // Default task(s).
-  grunt.registerTask('default', ['copy','cssmin']);
+  grunt.registerTask('default', ['copy:css','cssmin','copy:js']);
 
 };
