@@ -37,6 +37,19 @@ module.exports = function(grunt) {
         }
     },          
     
+    'closure-compiler': {
+        frontend: {
+          closurePath: './closure-compiler',
+          cwd: '../skin/frontend/<%= theme %>/js/',
+          js:  ['iphone.js'],
+          jsOutputFile: '../skin/frontend/<%= theme %>/min/js/',
+          maxBuffer: 500,
+          options: {
+            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+            language_in: 'ECMASCRIPT5_STRICT'
+          }
+        }
+      },
     
       
   });
@@ -49,6 +62,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-closure-compiler');
   
   // Default task(s).
-  grunt.registerTask('default', ['copy:css','cssmin','copy:js']);
+  grunt.registerTask('default', ['copy:css','cssmin','copy:js','closure-compiler']);
 
 };
