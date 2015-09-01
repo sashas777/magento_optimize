@@ -37,21 +37,23 @@ module.exports = function(grunt) {
         }
     },          
     
-    'closure-compiler': {
-        frontend: {
-          closurePath: './closure-compiler',
-          cwd: '../skin/frontend/<%= theme %>/js/',
-          js:  ['iphone.js'],
-          jsOutputFile: '../skin/frontend/<%= theme %>/min/js/',
-          maxBuffer: 500,
-          options: {
-            compilation_level: 'ADVANCED_OPTIMIZATIONS',
-            language_in: 'ECMASCRIPT5_STRICT'
-          }
-        }
+    closureCompiler:  {    	 
+    	options: {    		
+    		checkModified: true,    		        	
+        	compilerFile: './closure-compiler/build/compiler.jar',        	 
+        	 
+        	compilerOpts: {
+        		language_in: 'ECMASCRIPT5',
+        	 }
+        },
+          
+        targetName: {
+          expand: true,
+    	  cwd: '../skin/frontend/<%= theme %>/js/',
+    	  src: "*.js",
+    	  dest: '../skin/frontend/<%= theme %>/min/js/'
+        }  
       },
-    
-      
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -59,9 +61,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-yui-compressor');
   grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-closure-compiler');
+  grunt.loadNpmTasks('grunt-closure-tools');
   
   // Default task(s).
-  grunt.registerTask('default', ['copy:css','cssmin','copy:js','closure-compiler']);
+  grunt.registerTask('default', ['copy:css','cssmin','copy:js','closureCompiler']);
 
 };

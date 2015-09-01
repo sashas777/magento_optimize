@@ -3,7 +3,7 @@
 grunt --theme="default/base" <br/>
 
 ## Components:
-https://github.com/gmarty/grunt-closure-compiler
+https://github.com/thanpolas/grunt-closure-tools
 
 ## Dependancies
 
