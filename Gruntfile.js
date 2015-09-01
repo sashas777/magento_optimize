@@ -25,6 +25,13 @@ module.exports = function(grunt) {
           dest: '../skin/frontend/<%= theme %>/source/js/'	   
         },      
 	   
+      img:{	    
+       	nonull: true,
+     	expand: true,
+     	cwd: '../skin/frontend/<%= theme %>/images/',
+     	src: ["*.*", "**/*.*"],
+     	dest: '../skin/frontend/<%= theme %>/source/images/'	   
+    },   
 	    
     },
     
@@ -54,6 +61,18 @@ module.exports = function(grunt) {
     	  dest: '../skin/frontend/<%= theme %>/min/js/'
         }  
       },
+      
+     imagemin: {    	    
+    	      dynamic: {                         
+    	        files: [{
+    	          expand: true,
+    	          cwd: '../skin/frontend/<%= theme %>/images/',
+    	          src: ['**/*.{png,jpg,gif}'],
+    	          dest: '../skin/frontend/<%= theme %>/min/images/'                 
+    	        }]
+    	      }    	  
+      }
+      
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -62,8 +81,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-closure-tools');
+  grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', ['copy:css','cssmin','copy:js','closureCompiler']);
+  grunt.registerTask('default', ['newer:copy:css','newer:cssmin','newer:copy:js','newer:closureCompiler','newer:copy:img','imagemin']);
 
 };

@@ -3,7 +3,9 @@
 grunt --theme="default/base" <br/>
 
 ## Components:
-https://github.com/thanpolas/grunt-closure-tools
+https://github.com/thanpolas/grunt-closure-tools <br/>
+https://github.com/gruntjs/grunt-contrib-imagemin <br/>
+https://github.com/tschaub/grunt-newer <br/>
 
 ## Dependancies
 
