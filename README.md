@@ -7,6 +7,9 @@ https://github.com/thanpolas/grunt-closure-tools <br/>
 https://github.com/gruntjs/grunt-contrib-imagemin <br/>
 https://github.com/tschaub/grunt-newer <br/>
 
+## GIF Images
+https://github.com/kohler/gifsicle
+(Additional tool) 
 ## Dependancies
 
 ### Closure Compiler installation from source
