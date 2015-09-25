@@ -14,7 +14,7 @@ module.exports = function(grunt) {
        	expand: true,
        	cwd: '../skin/frontend/<%= theme %>/css/',
        	src: ["*.*", "**/*.*"],
-        dest: '../skin/frontend/<%= theme %>/source/css/'	   
+        dest: './source/skin/frontend/<%= theme %>/css/'	   
       },
 
       js:{	    
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
          	expand: true,
          	cwd: '../skin/frontend/<%= theme %>/js/',
          	src: ["*.*", "**/*.*"],
-          dest: '../skin/frontend/<%= theme %>/source/js/'	   
+          dest: './source/skin/frontend/<%= theme %>/js/'	   
         },      
 	   
       img:{	    
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
      	expand: true,
      	cwd: '../skin/frontend/<%= theme %>/images/',
      	src: ["*.*", "**/*.*"],
-     	dest: '../skin/frontend/<%= theme %>/source/images/'	   
+     	dest: './source/skin/frontend/<%= theme %>/images/'	   
     },   
 	    
     },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '../skin/frontend/<%= theme %>/css/',
             src: ["*.*", "**/*.*"],
-            dest: '../skin/frontend/<%= theme %>/min/css/'             
+            dest: './min/skin/frontend/<%= theme %>/css/'             
         }
     },          
     
@@ -58,19 +58,29 @@ module.exports = function(grunt) {
           expand: true,
     	  cwd: '../skin/frontend/<%= theme %>/js/',
     	  src: "*.js",
-    	  dest: '../skin/frontend/<%= theme %>/min/js/'
+    	  dest: './min/skin/frontend/<%= theme %>/js/'
         }  
       },
       
-     imagemin: {    	    
-    	      dynamic: {                         
-    	        files: [{
-    	          expand: true,
-    	          cwd: '../skin/frontend/<%= theme %>/images/',
-    	          src: ['**/*.{png,jpg,gif}'],
-    	          dest: '../skin/frontend/<%= theme %>/min/images/'                 
-    	        }]
-    	      }    	  
+     imagemin: {    
+    	  
+	      dynamic: {                         
+	        files: [
+	          {
+		          expand: true,
+		          cwd: '../skin/frontend/<%= theme %>/images/',
+		          src: ['**/*.{png,jpg,gif}'],
+		          dest: './min/skin/frontend/<%= theme %>/images/'                 
+	          },
+	          {
+		          expand: true,
+		          cwd: '../media/',
+		          src: ['**/*.{png,jpg,gif}'],
+		          dest: './min/media/'                 
+		      }
+	        ]
+	      }  
+		       
       }
       
   });
@@ -85,6 +95,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', ['newer:copy:css','newer:cssmin','newer:copy:js','newer:closureCompiler','newer:copy:img','newer:imagemin']);
+  grunt.registerTask('default', [/*'newer:copy:css','newer:cssmin','newer:copy:js','newer:closureCompiler','newer:copy:img',*/'imagemin']);
 
 };
