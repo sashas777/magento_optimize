@@ -25,6 +25,15 @@ module.exports = function(grunt) {
           dest: './source/skin/frontend/<%= theme %>/js/'	   
         },      
 	   
+       coreJs:{	    
+         	nonull: true,
+         	expand: true,
+         	cwd: '../js/',
+         	src: ["*.*", "**/*.*"],
+          dest: './source/js/'	   
+        },      
+	   
+        
       img:{	    
        	nonull: true,
      	expand: true,
@@ -44,7 +53,8 @@ module.exports = function(grunt) {
         }
     },          
     
-    closureCompiler:  {    	 
+    closureCompiler:  {  
+    	 
     	options: {    		
     		checkModified: true,    		        	
         	compilerFile: './closure-compiler/build/compiler.jar',        	 
@@ -53,17 +63,45 @@ module.exports = function(grunt) {
         		language_in: 'ECMASCRIPT5',
         	 }
         },
-          
-        targetName: {
-          expand: true,
-    	  cwd: '../skin/frontend/<%= theme %>/js/',
-    	  src: "*.js",
-    	  dest: './min/skin/frontend/<%= theme %>/js/'
-        }  
+        /*  
+       targetName: {
+        	  expand: true,
+        	  cwd: '../js/',
+        	  src: "*.js",
+        	  dest: './min/js/'
+        } ,*/
+        minify: {             
+            files: [
+                {
+                  expand: true,
+              	  cwd: '../skin/frontend/<%= theme %>/js/',
+              	  src: "*.js",
+              	  dest: './min/skin/frontend/<%= theme %>/js/'
+                } ,
+                {
+                  expand: true,
+                  cwd: '../js/prototype/',
+                  src: "*.js",
+                  dest: './min/js/prototype/'
+                },
+                {
+                    expand: true,
+                    cwd: '../js/scriptaculous/',
+                    src: "*.js",
+                    dest: './min/js/scriptaculous/'
+                  },        
+                  {
+                      expand: true,
+                      cwd: '../js/varien/',
+                      src: "*.js",
+                      dest: './min/js/varien/'
+                    }                   
+            ]
+        },        
+       
       },
       
-     imagemin: {    
-    	  
+     imagemin: {        	  
 	      dynamic: {                         
 	        files: [
 	          {
@@ -95,6 +133,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', ['newer:copy:css','newer:cssmin','newer:copy:js','newer:closureCompiler','newer:copy:img','newer:imagemin']);
+  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img','newer:imagemin']);
 
 };
