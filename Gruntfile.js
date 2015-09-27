@@ -42,6 +42,16 @@ module.exports = function(grunt) {
      	dest: './source/skin/frontend/<%= theme %>/images/'	   
     },   
 	    
+    baseSkin:{	    
+       	nonull: true,
+     	expand: true,
+     	cwd: '../skin/frontend/base/default/',
+     	src: ["*.*", "**/*.*"],
+     	dest: './source/skin/frontend/base/default/'	   
+    },
+    
+   
+    
     },
     
   
@@ -57,6 +67,12 @@ module.exports = function(grunt) {
 	              src: ["*.*", "**/*.*"],
 	              dest: './min/skin/frontend/<%= theme %>/css/'             
 	      	  },
+	      	  {
+	              expand: true,
+	              cwd: '../skin/frontend/base/default/css/',
+	              src: ["*.*", "**/*.*"],
+	              dest: './min/skin/frontend/base/default/css/'             
+	      	  },	      	  
 	  	  	  {
 	              expand: true,
 	              cwd: '../js/calendar/',
@@ -93,6 +109,12 @@ module.exports = function(grunt) {
               	  dest: './min/skin/frontend/<%= theme %>/js/'
                 } ,
                 {
+                    expand: true,
+                	  cwd: '../skin/frontend/base/default/js/',
+                	  src: "*.js",
+                	  dest: './min/skin/frontend/base/default/js/'
+                } ,                
+                {
                   expand: true,
                   cwd: '../js/prototype/',
                   src: "*.js",
@@ -103,13 +125,13 @@ module.exports = function(grunt) {
                     cwd: '../js/scriptaculous/',
                     src: "*.js",
                     dest: './min/js/scriptaculous/'
-                  },        
-                  {
-                      expand: true,
-                      cwd: '../js/varien/',
-                      src: "*.js",
-                      dest: './min/js/varien/'
-                    }                   
+                },        
+                {
+					expand: true,
+					cwd: '../js/varien/',
+					src: "*.js",
+					dest: './min/js/varien/'
+                }                   
             ]
         },        
        
@@ -124,6 +146,12 @@ module.exports = function(grunt) {
 		          src: ['**/*.{png,jpg,gif}'],
 		          dest: './min/skin/frontend/<%= theme %>/images/'                 
 	          },
+	          {
+		          expand: true,
+		          cwd: '../skin/frontend/base/default/images/',
+		          src: ['**/*.{png,jpg,gif}'],
+		          dest: './min/skin/frontend/base/default/images/'                 
+	          },	          
 	          {
 		          expand: true,
 		          cwd: '../media/',
@@ -147,6 +175,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img', 'newer:imagemin']);
+  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:copy:baseSkin','newer:closureCompiler:minify' ,'newer:copy:img',  'newer:imagemin']);
 
 };
