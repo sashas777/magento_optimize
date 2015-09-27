@@ -122,6 +122,18 @@ module.exports = function(grunt) {
                 },
                 {
                     expand: true,
+                    cwd: '../js/mage/',
+                    src: "*.js",
+                    dest: './min/js/mage/'
+                  },             
+                  {
+                      expand: true,
+                      cwd: '../js/lib/',
+                      src: "*.js",
+                      dest: './min/js/lib/'
+                    },                  
+                {
+                    expand: true,
                     cwd: '../js/scriptaculous/',
                     src: "*.js",
                     dest: './min/js/scriptaculous/'
