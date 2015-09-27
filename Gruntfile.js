@@ -147,6 +147,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img',/*'newer:imagemin'*/]);
+  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img', 'newer:imagemin']);
 
 };
