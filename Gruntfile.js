@@ -44,14 +44,28 @@ module.exports = function(grunt) {
 	    
     },
     
+  
     cssmin: {
-    	files: {
-            expand: true,
-            cwd: '../skin/frontend/<%= theme %>/css/',
-            src: ["*.*", "**/*.*"],
-            dest: './min/skin/frontend/<%= theme %>/css/'             
-        }
-    },          
+    	dist:{
+			options: {
+				'report': false
+			},    		
+        	files: [ 
+	      	  {
+	              expand: true,
+	              cwd: '../skin/frontend/<%= theme %>/css/',
+	              src: ["*.*", "**/*.*"],
+	              dest: './min/skin/frontend/<%= theme %>/css/'             
+	      	  },
+	  	  	  {
+	              expand: true,
+	              cwd: '../js/calendar/',
+	              src: ["*.css", "**/*.css"],
+	              dest: './min/js/calendar/'             
+	      	  }       	  
+      	    ]
+    	} 
+    },  
     
     closureCompiler:  {  
     	 
@@ -133,6 +147,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   
   // Default task(s).
-  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img','newer:imagemin']);
+  grunt.registerTask('default', [ 'newer:copy:css','newer:cssmin','newer:copy:js','newer:copy:coreJs','newer:closureCompiler:minify' ,'newer:copy:img',/*'newer:imagemin'*/]);
 
 };
